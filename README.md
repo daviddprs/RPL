@@ -49,11 +49,11 @@ Pastikan komputer/server Anda telah menginstal:
 Buka terminal (*Git Bash / PowerShell / Command Prompt*) di komputer Anda, lalu jalankan perintah berikut untuk mengkloning repositori ini:
 
 ```bash
-git clone <URL_REPOSITORY_GITHUB_ANDA>
+git clone (https://github.com/daviddprs/RPL.git)
 cd "laravel coffeshop"
 ```
 
-*(Jika Anda sudah memiliki folder proyek di komputer lokal, langsung buka terminal di dalam folder proyek tersebut).*
+*(Jika sudah memiliki folder proyek di komputer lokal, langsung buka terminal di dalam folder proyek tersebut).*
 
 ---
 
