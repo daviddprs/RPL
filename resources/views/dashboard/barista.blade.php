@@ -1,3 +1,10 @@
+@extends('layouts.app')
+
+@section('title', 'Dashboard Barista')
+@section('page-title', 'Dashboard Barista')
+@section('page-subtitle', 'Layar pesanan dapur (Kitchen Display)')
+
+@section('content')
 <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
     {{-- Active Orders (Preparing) --}}
     <div>
@@ -99,3 +106,4 @@
         </div>
     </div>
 </div>
+@endsection

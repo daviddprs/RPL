@@ -1,3 +1,10 @@
+@extends('layouts.app')
+
+@section('title', 'Dashboard Kasir')
+@section('page-title', 'Dashboard Kasir')
+@section('page-subtitle', 'Verifikasi pembayaran & kelola antrean pesanan')
+
+@section('content')
 {{-- Stats --}}
 <div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
     <div class="rounded-3xl border border-coffee-200 bg-white p-5 shadow-xs">
@@ -109,3 +116,4 @@
         </div>
     @endforelse
 </div>
+@endsection
