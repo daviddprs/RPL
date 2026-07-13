@@ -10,6 +10,11 @@
     <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700,800&display=swap" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- TAMBAHAN: CSS untuk mengatasi blink Alpine.js --}}
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 </head>
 <body class="min-h-screen bg-coffee-50 font-sans text-coffee-900 antialiased selection:bg-coffee-200 selection:text-coffee-900">
     {{-- Header / Navbar Customer --}}
@@ -33,7 +38,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
                     <span class="hidden sm:inline">Keranjang</span>
-                    <span x-data x-show="$store.cart.count > 0"
+                    <span x-data x-show="$store.cart.count > 0" x-cloak
                           x-text="$store.cart.count"
                           class="flex h-5 min-w-5 items-center justify-center rounded-full bg-coffee-600 px-1.5 text-xs font-bold text-white shadow-xs">
                     </span>

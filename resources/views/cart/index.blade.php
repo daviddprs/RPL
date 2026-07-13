@@ -103,8 +103,6 @@ function cartPage() {
         selectedPayment: 'qris',
         paymentMethods: [
             { value: 'qris', label: 'QRIS Instant', icon: '📱' },
-            { value: 'e-wallet', label: 'E-Wallet (Gopay/OVO)', icon: '💳' },
-            { value: 'debit', label: 'Kartu Debit', icon: '🏧' },
             { value: 'tunai', label: 'Bayar di Kasir (Tunai)', icon: '💵' },
         ],
         submitOrder(event) {

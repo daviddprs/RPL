@@ -128,16 +128,6 @@
                                       class="w-full rounded-xl border border-coffee-200 bg-coffee-50/50 px-3.5 py-2.5 text-sm text-coffee-900 placeholder-coffee-400 focus:border-coffee-600 focus:bg-white focus:outline-none focus:ring-4 focus:ring-coffee-600/10"></textarea>
                         </div>
 
-                        {{-- Quick options --}}
-                        <div class="mt-3 flex flex-wrap gap-1.5">
-                            @foreach(['Less Sugar', 'Extra Shot', 'No Ice', 'Extra Hot', 'Oat Milk'] as $option)
-                                <button type="button"
-                                        @click="notes = notes ? notes + ', {{ $option }}' : '{{ $option }}'"
-                                        class="rounded-lg border border-coffee-200 bg-coffee-50 px-2.5 py-1 text-[11px] font-semibold text-coffee-700 transition-all hover:border-coffee-600 hover:bg-coffee-100">
-                                    {{ $option }}
-                                </button>
-                            @endforeach
-                        </div>
 
                         <div class="mt-6 flex gap-3">
                             <button @click="showModal = false" class="flex-1 rounded-xl border border-coffee-200 py-2.5 text-sm font-semibold text-coffee-700 hover:bg-coffee-50">
