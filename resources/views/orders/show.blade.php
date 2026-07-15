@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-2xl mx-auto mb-20 md:mb-0">
     {{-- Order Status Header --}}
-    <div class="mb-6 rounded-3xl border border-coffee-200 bg-white p-8 text-center shadow-sm">
+    <div class="mb-6 rounded-3xl border border-coffee-200 bg-white p-8 text-center shadow-sm no-print">
         <div class="mb-3 inline-flex h-16 w-16 items-center justify-center rounded-2xl
             @switch($order->status)
                 @case('pending') bg-yellow-100 text-yellow-800 @break
@@ -28,7 +28,7 @@
     </div>
 
     {{-- Status Timeline --}}
-    <div class="mb-6 rounded-3xl border border-coffee-200 bg-white p-6 shadow-sm">
+    <div class="mb-6 rounded-3xl border border-coffee-200 bg-white p-6 shadow-sm no-print">
         <h3 class="mb-4 text-sm font-bold text-coffee-950">Alur Status Pesanan</h3>
         <div class="relative">
             @php
@@ -61,8 +61,16 @@
         </div>
     </div>
 
-    {{-- Order Details --}}
-    <div class="mb-6 rounded-3xl border border-coffee-200 bg-white p-6 shadow-sm">
+    {{-- Order Details (Bagian yang akan dicetak) --}}
+    <div id="struk-area" class="mb-6 rounded-3xl border border-coffee-200 bg-white p-6 shadow-sm">
+        
+        {{-- Header khusus cetak (Tersembunyi di web, muncul di kertas) --}}
+        <div class="print-only-header hidden text-center mb-4 border-b border-dashed border-gray-400 pb-4">
+            <h2 class="text-lg font-extrabold text-black mb-1">KopiKu Coffee & Eatery</h2>
+            <p class="text-xs font-mono text-gray-800">Nota: #{{ $order->queue_number }}</p>
+            <p class="text-xs text-gray-800">{{ $order->created_at->format('d M Y, H:i') }}</p>
+        </div>
+
         <h3 class="mb-4 text-sm font-bold text-coffee-950">Detail Pesanan</h3>
 
         <div class="space-y-3">
@@ -79,12 +87,12 @@
             @endforeach
         </div>
 
-        <hr class="my-4 border-coffee-100">
+        <hr class="my-4 border-coffee-100 print-border-dashed">
 
         <div class="space-y-2 text-sm">
             <div class="flex justify-between text-coffee-700">
                 <span>Tipe Layanan</span>
-                <span class="rounded-full px-3 py-0.5 text-xs font-bold {{ $order->order_type === 'dine-in' ? 'bg-blue-50 text-blue-700' : 'bg-orange-50 text-orange-700' }}">
+                <span class="rounded-full px-3 py-0.5 text-xs font-bold {{ $order->order_type === 'dine-in' ? 'bg-blue-50 text-blue-700' : 'bg-orange-50 text-orange-700' }} print:bg-transparent print:text-black print:p-0">
                     {{ ucfirst($order->order_type) }}
                 </span>
             </div>
@@ -92,30 +100,87 @@
                 <span>Metode Pembayaran</span>
                 <span class="font-bold text-coffee-900 uppercase">{{ $order->payment_method }}</span>
             </div>
-            <div class="flex justify-between text-coffee-700">
+            <div class="flex justify-between text-coffee-700 no-print">
                 <span>Status Pembayaran</span>
                 <span class="rounded-full px-3 py-0.5 text-xs font-bold {{ $order->payment_status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
                     {{ $order->payment_status === 'paid' ? 'Lunas' : 'Belum Bayar' }}
                 </span>
             </div>
-            <hr class="border-coffee-100">
+            <hr class="border-coffee-100 print-border-dashed">
             <div class="flex justify-between text-lg font-extrabold text-coffee-950">
                 <span>Total Bayar</span>
                 <span>{{ $order->formatted_total }}</span>
             </div>
         </div>
+
+        {{-- Footer khusus cetak --}}
+        <div class="print-only-footer hidden text-center mt-6 pt-4 border-t border-dashed border-gray-400 text-xs">
+            Terima kasih atas kunjungan Anda!<br>
+            Cek promo menarik di Instagram @kopiku
+        </div>
     </div>
 
     {{-- Action Buttons --}}
-    <div class="flex gap-3">
-        <a href="{{ route('home') }}" class="flex-1 rounded-xl border border-coffee-200 bg-white py-3 text-center text-sm font-bold text-coffee-700 shadow-xs hover:bg-coffee-50">
+    {{-- Action Buttons --}}
+    <div class="flex flex-wrap gap-3 no-print">
+        <a href="{{ route('home') }}" class="flex-1 rounded-xl border border-coffee-200 bg-white py-3 text-center text-sm font-bold text-coffee-700 shadow-xs hover:bg-coffee-50 transition-all">
             ← Pesan Lagi
         </a>
         @auth
-            <a href="{{ route('orders.my') }}" class="flex-1 rounded-xl bg-coffee-700 py-3 text-center text-sm font-bold text-white shadow-sm hover:bg-coffee-800">
+            <a href="{{ route('orders.my') }}" class="flex-1 rounded-xl bg-coffee-700 py-3 text-center text-sm font-bold text-white shadow-sm hover:bg-coffee-800 transition-all">
                 Pesanan Saya
             </a>
         @endauth
+        <button onclick="window.print()" class="flex-1 rounded-xl border border-coffee-200 bg-white py-3 text-center text-sm font-bold text-coffee-700 shadow-xs hover:bg-coffee-50 transition-all">
+            🖨️ Cetak Struk
+        </button>
     </div>
 </div>
+
+{{-- CSS khusus untuk Mode Print (Struk Thermal Kasir) --}}
+<style>
+@media print {
+    /* 1. Sembunyikan seluruh UI web (navbar, background, dll) */
+    body * {
+        visibility: hidden;
+        background: white !important;
+        box-shadow: none !important;
+    }
+    
+    /* 2. Sembunyikan elemen dengan class 'no-print' secara paksa */
+    .no-print {
+        display: none !important;
+    }
+
+    /* 3. Tampilkan hanya ID struk-area dan elemen di dalamnya */
+    #struk-area, #struk-area * {
+        visibility: visible;
+        color: black !important; /* Pastikan teks tercetak hitam pekat */
+    }
+
+    /* 4. Munculkan header dan footer khusus struk */
+    .print-only-header, .print-only-footer {
+        display: block !important;
+    }
+
+    /* 5. Ubah border menjadi putus-putus khas struk belanja */
+    .print-border-dashed {
+        border-top: 1px dashed #000 !important;
+        border-bottom: none !important;
+    }
+
+    /* 6. Atur ukuran kotak agar pas dengan kertas printer thermal (80mm) */
+    #struk-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: 80mm;
+        border: none !important;
+        padding: 5mm !important;
+        margin: 0 !important;
+        font-family: monospace, sans-serif !important;
+    }
+}
+</style>
 @endsection
