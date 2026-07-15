@@ -78,18 +78,6 @@
 
     {{-- Charts Section --}}
     <div class="mb-8 grid grid-cols-1 gap-6 xl:grid-cols-2">
-        {{-- Revenue Chart --}}
-        <div class="rounded-3xl border border-coffee-200 bg-white p-6 shadow-xs">
-            <h3 class="mb-4 text-base font-bold text-coffee-950">Pendapatan 7 Hari Terakhir</h3>
-            <canvas id="revenueChart" class="h-64"></canvas>
-        </div>
-
-        {{-- Top Menus Chart --}}
-        <div class="rounded-3xl border border-coffee-200 bg-white p-6 shadow-xs">
-            <h3 class="mb-4 text-base font-bold text-coffee-950">Menu Terlaris</h3>
-            <canvas id="topMenuChart" class="h-64"></canvas>
-        </div>
-    </div>
 
     {{-- Recent Orders Table --}}
     <div class="rounded-3xl border border-coffee-200 bg-white p-6 shadow-xs">

@@ -113,14 +113,7 @@
             </div>
         </div>
 
-        {{-- Footer khusus cetak --}}
-        <div class="print-only-footer hidden text-center mt-6 pt-4 border-t border-dashed border-gray-400 text-xs">
-            Terima kasih atas kunjungan Anda!<br>
-            Cek promo menarik di Instagram @kopiku
-        </div>
-    </div>
 
-    {{-- Action Buttons --}}
     {{-- Action Buttons --}}
     <div class="flex flex-wrap gap-3 no-print">
         <a href="{{ route('home') }}" class="flex-1 rounded-xl border border-coffee-200 bg-white py-3 text-center text-sm font-bold text-coffee-700 shadow-xs hover:bg-coffee-50 transition-all">
@@ -131,56 +124,7 @@
                 Pesanan Saya
             </a>
         @endauth
-        <button onclick="window.print()" class="flex-1 rounded-xl border border-coffee-200 bg-white py-3 text-center text-sm font-bold text-coffee-700 shadow-xs hover:bg-coffee-50 transition-all">
-            🖨️ Cetak Struk
-        </button>
     </div>
 </div>
-
-{{-- CSS khusus untuk Mode Print (Struk Thermal Kasir) --}}
-<style>
-@media print {
-    /* 1. Sembunyikan seluruh UI web (navbar, background, dll) */
-    body * {
-        visibility: hidden;
-        background: white !important;
-        box-shadow: none !important;
-    }
-    
-    /* 2. Sembunyikan elemen dengan class 'no-print' secara paksa */
-    .no-print {
-        display: none !important;
-    }
-
-    /* 3. Tampilkan hanya ID struk-area dan elemen di dalamnya */
-    #struk-area, #struk-area * {
-        visibility: visible;
-        color: black !important; /* Pastikan teks tercetak hitam pekat */
-    }
-
-    /* 4. Munculkan header dan footer khusus struk */
-    .print-only-header, .print-only-footer {
-        display: block !important;
-    }
-
-    /* 5. Ubah border menjadi putus-putus khas struk belanja */
-    .print-border-dashed {
-        border-top: 1px dashed #000 !important;
-        border-bottom: none !important;
-    }
-
-    /* 6. Atur ukuran kotak agar pas dengan kertas printer thermal (80mm) */
-    #struk-area {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        max-width: 80mm;
-        border: none !important;
-        padding: 5mm !important;
-        margin: 0 !important;
-        font-family: monospace, sans-serif !important;
-    }
-}
 </style>
 @endsection
