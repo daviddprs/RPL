@@ -166,4 +166,4 @@ Anda dapat mencoba masuk menggunakan salah satu akun default berikut di **http:/
 ---
 
 ## 📜 Lisensi & Pengembang
-Dibuat dengan ❤️ untuk Laporan Proyek Rekayasa Perangkat Lunak — **Ryan Sheva Danarindra** & **David Prastiansyah**.
+Dibuat untuk Laporan Proyek Rekayasa Perangkat Lunak — **Ryan Sheva Danarindra** & **David Prastiansyah**.
